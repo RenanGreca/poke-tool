@@ -1,5 +1,7 @@
 <?php
 // Poketool v0.1
+session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +28,7 @@
                 <input type="text" name="email" /><br>
                 <input type="password" name="passwd" />
             </div>
-            <input type="submit" class="button" value="Log In" />
+            <input type="submit" value="Log In" />
         </form>
         </div>
 
@@ -43,11 +45,14 @@
                 <input type="text" name="name" /><br>
                 <input type="password" name="passwd" />
             </div>
-            <input type="submit" class="button" value="Register" />
+            <input type="submit" value="Register" />
         </form>
         </div>
     </div>
 </center>
-
+<div class="footer">
+    <a href="https://github.com/RenanGreca/poke-tool">Created by Renan Greca and Mari Bennett in 2014</a><br />
+    Pokémon and all related content is owned by The Pokémon Company, Nintendo and GameFreak<br />
+</div>
 </body>
 </html>
