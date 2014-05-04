@@ -1,0 +1,69 @@
+<?php
+
+$link = mysqli_connect("localhost", "test", "test", "poketool");
+
+/*$query = "select * from Pokemon WHERE dexno < 152";
+$result = mysqli_query($link, $query); 
+while ($pokemon = mysqli_fetch_array($result)) {
+     echo $pokemon['name']; ?> <br>
+    <?
+} */
+
+$pokemon_csv       = array_map('str_getcsv', file(dirname(__FILE__).'/csv/pokemon.csv'));
+$pokemon_types_csv = array_map('str_getcsv', file(dirname(__FILE__).'/csv/pokemon_types.csv'));
+$types_csv         = array_map('str_getcsv', file(dirname(__FILE__).'/csv/type_names.csv'));
+
+
+// echo $pokemon_csv[1][1];
+// id    identifier  species_id  height  weight  base_experience order   is_default
+foreach ($pokemon_csv as $pokemon) {
+    // echo $pokemon[1].'<br>';
+
+    $query = "INSERT INTO Pokemon (
+                dexno,
+                name
+              ) VALUES (
+                $pokemon[0],
+                '".ucfirst($pokemon[1])."'
+              );";
+    
+    mysqli_query($link, $query);
+
+}
+
+foreach ($types_csv as $type) {
+    $query = "INSERT INTO Types (
+                tid,
+                name
+              ) VALUES (
+                $type[0],
+                'ucfirst($type[1])'
+              );";
+    
+    mysqli_query($link, $query);
+}
+
+foreach ($pokemon_types_csv as $pokemon_types) {
+
+    if ($pokemon_types[2] == 1) {
+        $query = "UPDATE Pokemon
+                  SET type1 = $pokemon_types[1]
+                  WHERE dexno = $pokemon_types[0];";
+    } else {
+        $query = "UPDATE Pokemon
+                  SET type2 = $pokemon_types[1]
+                  WHERE dexno = $pokemon_types[0];";
+    }
+
+    mysqli_query($link, $query);
+}
+
+mysqli_close($link);
+
+/*$result = mysqli_query($link, $query); 
+while ($pokemon = mysqli_fetch_array($result)) {
+     echo $pokemon['name']; ?> <br>
+    <?
+} */
+
+?>
