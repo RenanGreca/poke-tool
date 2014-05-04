@@ -28,5 +28,5 @@ $link = mysqli_connect("localhost", "test", "test", "poketool");
     }
 mysqli_close($link);
 
-header('Location: register.php');
+header('Location: main.php');
 ?>

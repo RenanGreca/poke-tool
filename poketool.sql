@@ -98,7 +98,7 @@ INSERT INTO Game (gid, gen, name, plat) VALUES (7, 2, "Pokemon Crystal", "GameBo
 
 INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (1, "Bulbasaur", 1, NULL);
 INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (2, "Ivysaur", 1, NULL);
-INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (3, "Venasaur", 1, NULL);
+INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (3, "Venusaur", 1, NULL);
 
 INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (1,2,3,4,1,6);
 INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (2,2,3,4,1,6);
