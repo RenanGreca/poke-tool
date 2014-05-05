@@ -1,5 +1,23 @@
 <?php
 
+session_start();
+
+$email = $_POST['email'];
+$name = $_POST['name'];
+$passwd = $_POST['passwd'];
+
+$query = "insert into USER (
+            name,
+            email,
+            password
+          ) values (
+            '$email',
+            '$name',
+            '$passwd'
+          )";
+
+$_SESSION['logged_user'] = $name;
+
 if (isset($_POST)){
  $selected_game = $_POST['game'];}
 ?>
