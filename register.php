@@ -47,7 +47,7 @@ if(!$selected_game){ ?>
     while ($game = mysqli_fetch_array($result)) {
         ?>
         <input type="radio" name="game" value="<? echo $game['gid'] ?>"/>
-        <? echo $game['name'] ?> (<? echo $game['plat'] ?>)<br>
+        <? echo $game['name'] ?><br>
         <?
     } ?>
     <input type="submit">
@@ -63,7 +63,7 @@ if(!$selected_game){ ?>
     $result = mysqli_query($link, $query);
     while ($pokemon = mysqli_fetch_array($result)) {
         ?>
-        <input type="checkbox" name="pokemon" value=<? echo $pokemon['dexno'] ?> />
+        <input type="checkbox" name=<? echo $pokemon['dexno'] ?> value=<? echo $pokemon['dexno'] ?> />
         <? echo $pokemon['dexno'] ?> - <? echo $pokemon['name'] ?><br>
         <?
     }

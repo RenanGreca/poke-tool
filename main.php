@@ -53,24 +53,46 @@ $result = mysqli_query($link, $query);
     ?> <tr><td><? echo $pokemon['dexno'] ?></td>
             <td><? echo $pokemon['name'] ?></td>
             <td><? switch ($pokemon['type1']) {
-                case 1:
-                    echo "Grass";
-                    break;
-                case 2:
-                    echo "Water";
-                    break;
-                default: 
-                    echo "Magic";
+                case 1:  echo "Normal";   break;
+                case 2:  echo "Fighting"; break;
+                case 3:  echo "Flying";   break;
+                case 4:  echo "Poison";   break;
+                case 5:  echo "Ground";   break;
+                case 6:  echo "Rock";     break;
+                case 7:  echo "Bug";      break;
+                case 8:  echo "Ghost";    break;
+                case 9:  echo "Steel";    break;
+                case 10: echo "Fire";     break;
+                case 11: echo "Water";    break;
+                case 12: echo "Grass";    break;
+                case 13: echo "Electric"; break;
+                case 14: echo "Psychic";  break;
+                case 15: echo "Ice";      break;
+                case 16: echo "Dragon";   break;
+                case 17: echo "Dark";     break;
+                case 18: echo "Fairy";    break;
+                default: echo "";
                 } ?></td>
             <td><? switch ($pokemon['type2']) {
-                case 1:
-                    echo "Grass";
-                    break;
-                case 2:
-                    echo "Water";
-                    break;
-                default: 
-                    echo "Magic";
+                case 1:  echo "Normal";   break;
+                case 2:  echo "Fighting"; break;
+                case 3:  echo "Flying";   break;
+                case 4:  echo "Poison";   break;
+                case 5:  echo "Ground";   break;
+                case 6:  echo "Rock";     break;
+                case 7:  echo "Bug";      break;
+                case 8:  echo "Ghost";    break;
+                case 9:  echo "Steel";    break;
+                case 10: echo "Fire";     break;
+                case 11: echo "Water";    break;
+                case 12: echo "Grass";    break;
+                case 13: echo "Electric"; break;
+                case 14: echo "Psychic";  break;
+                case 15: echo "Ice";      break;
+                case 16: echo "Dragon";   break;
+                case 17: echo "Dark";     break;
+                case 18: echo "Fairy";    break;
+                default: echo "";
                 } ?></td></tr> <?
     }  ?></table>
 </div>
@@ -85,7 +107,7 @@ $result = mysqli_query($link, $query);
     $result = mysqli_query($link, $query); 
     while ($pokemon = mysqli_fetch_array($result)) {
         ?>
-        <input type="checkbox" name="pokemon" value=<? echo $pokemon['dexno'] ?> />
+        <input type="checkbox" name="<? echo $pokemon['dexno'] ?>" value=<? echo $pokemon['dexno'] ?> />
         <? echo $pokemon['dexno'] ?> - <? echo $pokemon['name'] ?><br>
         <?
     } ?><input type="submit" value="Find them all!"/></form></div><?

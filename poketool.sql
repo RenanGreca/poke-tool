@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS poketool;
 CREATE DATABASE poketool;
 
-GRANT ALL PRIVILEGES ON poketool.* TO 'test'@'localhost'; #test passcode is test;
+GRANT ALL PRIVILEGES ON poketool.* TO 'test'@'localhost' IDENTIFIED BY 'test'; #test passcode is test;
 
 USE poketool;
 
@@ -95,22 +95,17 @@ CREATE INDEX poke_capt ON Capture(pid, gid) USING HASH; #Includes gid for game-d
 CREATE INDEX area_capt ON Capture(aid) USING HASH;
 
 # Listed below are some test data sets.
+/*
+INSERT INTO Game (gid, gen, name, plat) VALUES (1, 1, "Pokemon Red", "GameBoy");
+INSERT INTO Game (gid, gen, name, plat) VALUES (2, 1, "Pokemon Green", "GameBoy");
+INSERT INTO Game (gid, gen, name, plat) VALUES (3, 1, "Pokemon Blue", "GameBoy");
+INSERT INTO Game (gid, gen, name, plat) VALUES (4, 1, "Pokemon Yellow", "GameBoyColor");
+INSERT INTO Game (gid, gen, name, plat) VALUES (5, 2, "Pokemon Gold", "GameBoyColor");
+INSERT INTO Game (gid, gen, name, plat) VALUES (6, 2, "Pokemon Silver", "GameBoyColor");
+INSERT INTO Game (gid, gen, name, plat) VALUES (7, 2, "Pokemon Crystal", "GameBoyColor");
 
-#INSERT INTO Game (gid, gen, name, plat) VALUES (1, 1, "Pokemon Red", "GameBoy");
-#INSERT INTO Game (gid, gen, name, plat) VALUES (2, 1, "Pokemon Green", "GameBoy");
-#INSERT INTO Game (gid, gen, name, plat) VALUES (3, 1, "Pokemon Blue", "GameBoy");
-#INSERT INTO Game (gid, gen, name, plat) VALUES (4, 1, "Pokemon Yellow", "GameBoyColor");
-#INSERT INTO Game (gid, gen, name, plat) VALUES (5, 2, "Pokemon Gold", "GameBoyColor");
-#INSERT INTO Game (gid, gen, name, plat) VALUES (6, 2, "Pokemon Silver", "GameBoyColor");
-#INSERT INTO Game (gid, gen, name, plat) VALUES (7, 2, "Pokemon Crystal", "GameBoyColor");
-
-#INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (1, "Bulbasaur", 1, NULL);
-#INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (2, "Ivysaur", 1, NULL);
-#INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (3, "Venusaur", 1, NULL);
-
-#INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (1,2,3,4,1,6);
-#INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (2,2,3,4,1,6);
-#INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (2,2,3,4,1,1);
-#INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (3,2,3,4,1,1);
-
+INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (1, "Bulbasaur", 1, NULL);
+INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (2, "Ivysaur", 1, NULL);
+INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (3, "Venusaur", 1, NULL);
+*/
 INSERT INTO Users(uid, name) VALUES (1, "test");

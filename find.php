@@ -22,7 +22,7 @@ if (!isset($_POST)){
 $link = mysqli_connect("localhost", "test", "test", "poketool");
 ?> <table> <tr> <th>#</th> <th>Pokemon</th> <th> Area </th> <th> Method </th> <th> Time of Day </th> </tr> <?
     foreach ($_POST as $var=>$key) {
-        if ($var=="pokemon"){
+        if (!(($var == "user") OR ($var == "game"))){
         $query = "SELECT * FROM Pokemon JOIN Capture ON Pokemon.dexno = Capture.pid WHERE Pokemon.dexno = '$key'";    
         $result = mysqli_query($link, $query);
         while ($pokemon = mysqli_fetch_array($result)) { 

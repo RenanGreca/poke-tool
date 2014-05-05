@@ -53,6 +53,7 @@ session_start();
 <div class="footer">
     <a href="https://github.com/RenanGreca/poke-tool">Created by Renan Greca and Mari Bennett in 2014</a><br />
     Pokémon and all related content is owned by The Pokémon Company, Nintendo and GameFreak<br />
+    If this page is malfunctioning, consider viewing <a href="filler.php">this page</a> to refresh data set. <br/>
 </div>
 </body>
 </html>
