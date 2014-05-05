@@ -25,6 +25,7 @@ else {
 $link = mysqli_connect("localhost", "test", "test", "poketool");
 $query = "SELECT g.gen FROM Game g WHERE g.gid = '$game'";
 $gen = mysqli_fetch_array(mysqli_query($link, $query));
+$gen = $gen['gen'];
 ?> <table> <tr> <th>#</th> <th>Pokemon</th> <th> Area </th> <th> Method </th> <th> Time of Day </th> </tr> <?
     foreach ($_POST as $var=>$key) {
         if (!(($var == "user") OR ($var == "game"))){
