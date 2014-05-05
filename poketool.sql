@@ -28,25 +28,18 @@ CREATE TABLE Pokedex(
     CONSTRAINT FOREIGN KEY (uid) REFERENCES Users(uid) ON DELETE CASCADE
 );
 
-CREATE TABLE Capture (
-    pid INTEGER NOT NULL, #pokemon
-    aid INTEGER NOT NULL, #area
-    mid INTEGER NOT NULL, #method
-    rid INTEGER NOT NULL, #region
-    gid INTEGER NOT NULL, #game
-    tid INTEGER NOT NULL, #time
-    PRIMARY KEY (pid,aid,mid,rid,gid,tid)
+CREATE TABLE Region (
+    rid INTEGER NOT NULL,
+    name CHAR(10) NOT NULL,
+    PRIMARY KEY (rid)
 );
 
 CREATE TABLE Area (
     aid INTEGER NOT NULL,
     rid INTEGER NOT NULL,
-    name CHAR(20) NOT NULL
-);
-
-CREATE TABLE Region (
-    rid INTEGER NOT NULL,
-    name CHAR(10) NOT NULL
+    name CHAR(30) NOT NULL,
+    PRIMARY KEY (aid),
+    CONSTRAINT FOREIGN KEY (rid) REFERENCES Region(rid) ON DELETE CASCADE
 );
 
 CREATE TABLE Game (
@@ -81,10 +74,25 @@ CREATE TABLE CatchMethod (
     PRIMARY KEY (mid)
 );
 
+CREATE TABLE Capture (
+    cid INTEGER NOT NULL, #id
+    pid INTEGER NOT NULL, #pokemon
+    aid INTEGER NOT NULL, #area
+    mid INTEGER NULL, #method
+    gid INTEGER NOT NULL, #game
+    tid INTEGER NULL, #time
+    min_level INTEGER NULL,
+    max_level INTEGER NULL,
+    PRIMARY KEY (cid),
+    CONSTRAINT FOREIGN KEY (pid) REFERENCES Pokemon(dexno) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (aid) REFERENCES Area(aid) ON DELETE CASCADE,
+    CONSTRAINT FOREIGN KEY (gid) REFERENCES Game(gid) ON DELETE CASCADE
+);
+
 #Index Creation
 #CREATE INDEX poke_index ON Pokedex (uid, dexno);
 CREATE INDEX poke_capt ON Capture(pid, gid) USING HASH; #Includes gid for game-diffs
-CREATE INDEX area_capt ON Capture(aid, rid) USING HASH;
+CREATE INDEX area_capt ON Capture(aid) USING HASH;
 
 # Listed below are some test data sets.
 
@@ -100,9 +108,9 @@ CREATE INDEX area_capt ON Capture(aid, rid) USING HASH;
 #INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (2, "Ivysaur", 1, NULL);
 #INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (3, "Venusaur", 1, NULL);
 
-INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (1,2,3,4,1,6);
-INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (2,2,3,4,1,6);
-INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (2,2,3,4,1,1);
-INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (3,2,3,4,1,1);
+#INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (1,2,3,4,1,6);
+#INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (2,2,3,4,1,6);
+#INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (2,2,3,4,1,1);
+#INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (3,2,3,4,1,1);
 
 INSERT INTO Users(uid, name) VALUES (1, "test");
