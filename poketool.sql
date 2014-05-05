@@ -8,8 +8,8 @@ USE poketool;
 CREATE TABLE Pokemon(
     dexno INTEGER NOT NULL,
     name CHAR(20) NOT NULL,
-    type1 INTEGER NOT NULL,
-    type2 INTEGER,
+    type1 INTEGER NULL,
+    type2 INTEGER NULL,
     PRIMARY KEY (dexno)
 );
 
@@ -96,9 +96,9 @@ INSERT INTO Game (gid, gen, name, plat) VALUES (5, 2, "Pokemon Gold", "GameBoyCo
 INSERT INTO Game (gid, gen, name, plat) VALUES (6, 2, "Pokemon Silver", "GameBoyColor");
 INSERT INTO Game (gid, gen, name, plat) VALUES (7, 2, "Pokemon Crystal", "GameBoyColor");
 
-INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (1, "Bulbasaur", 1, NULL);
-INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (2, "Ivysaur", 1, NULL);
-INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (3, "Venusaur", 1, NULL);
+#INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (1, "Bulbasaur", 1, NULL);
+#INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (2, "Ivysaur", 1, NULL);
+#INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (3, "Venusaur", 1, NULL);
 
 INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (1,2,3,4,1,6);
 INSERT INTO Capture(pid, aid, mid, rid, gid, tid) VALUES (2,2,3,4,1,6);
