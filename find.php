@@ -3,6 +3,9 @@
 
 if (!isset($_POST)){
  header('Location: main.php');}
+else {
+ $game = $_POST['game'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +23,8 @@ if (!isset($_POST)){
 <div style="max-height: 550px; overflow: scroll;">
 <?
 $link = mysqli_connect("localhost", "test", "test", "poketool");
+$query = "SELECT g.gen FROM Game g WHERE g.gid = '$game'";
+$gen = mysqli_fetch_array(mysqli_query($link, $query));
 ?> <table> <tr> <th>#</th> <th>Pokemon</th> <th> Area </th> <th> Method </th> <th> Time of Day </th> </tr> <?
     foreach ($_POST as $var=>$key) {
         if (!(($var == "user") OR ($var == "game"))){
@@ -27,7 +32,7 @@ $link = mysqli_connect("localhost", "test", "test", "poketool");
                   FROM Pokemon p
                   JOIN Capture c ON p.dexno = c.pid
                   JOIN Area a ON a.aid = c.aid
-                  WHERE p.dexno = '$key'";    
+                  WHERE p.dexno = '$key' AND c.gid IN (SELECT g.gid From Game g WHERE g.gen = $gen)";
         $result = mysqli_query($link, $query);
         while ($pokemon = mysqli_fetch_array($result)) { 
         ?> <tr><td><? echo $pokemon['dexno'] ?></td>
