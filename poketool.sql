@@ -8,7 +8,7 @@ USE poketool;
 CREATE TABLE Pokemon(
     dexno INTEGER NOT NULL,
     name CHAR(20) NOT NULL,
-    type1 INTEGER NULL,
+    type1 INTEGER NULL, 
     type2 INTEGER NULL,
     PRIMARY KEY (dexno)
 );
@@ -53,7 +53,7 @@ CREATE TABLE Game (
     gid INTEGER NOT NULL,
     gen INTEGER NOT NULL,
     name CHAR(15) NOT NULL,
-    plat CHAR(15) NOT NULL,
+    plat CHAR(15) NULL,
     PRIMARY KEY (gid)
 );
 
@@ -88,13 +88,13 @@ CREATE INDEX area_capt ON Capture(aid, rid) USING HASH;
 
 # Listed below are some test data sets.
 
-INSERT INTO Game (gid, gen, name, plat) VALUES (1, 1, "Pokemon Red", "GameBoy");
-INSERT INTO Game (gid, gen, name, plat) VALUES (2, 1, "Pokemon Green", "GameBoy");
-INSERT INTO Game (gid, gen, name, plat) VALUES (3, 1, "Pokemon Blue", "GameBoy");
-INSERT INTO Game (gid, gen, name, plat) VALUES (4, 1, "Pokemon Yellow", "GameBoyColor");
-INSERT INTO Game (gid, gen, name, plat) VALUES (5, 2, "Pokemon Gold", "GameBoyColor");
-INSERT INTO Game (gid, gen, name, plat) VALUES (6, 2, "Pokemon Silver", "GameBoyColor");
-INSERT INTO Game (gid, gen, name, plat) VALUES (7, 2, "Pokemon Crystal", "GameBoyColor");
+#INSERT INTO Game (gid, gen, name, plat) VALUES (1, 1, "Pokemon Red", "GameBoy");
+#INSERT INTO Game (gid, gen, name, plat) VALUES (2, 1, "Pokemon Green", "GameBoy");
+#INSERT INTO Game (gid, gen, name, plat) VALUES (3, 1, "Pokemon Blue", "GameBoy");
+#INSERT INTO Game (gid, gen, name, plat) VALUES (4, 1, "Pokemon Yellow", "GameBoyColor");
+#INSERT INTO Game (gid, gen, name, plat) VALUES (5, 2, "Pokemon Gold", "GameBoyColor");
+#INSERT INTO Game (gid, gen, name, plat) VALUES (6, 2, "Pokemon Silver", "GameBoyColor");
+#INSERT INTO Game (gid, gen, name, plat) VALUES (7, 2, "Pokemon Crystal", "GameBoyColor");
 
 #INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (1, "Bulbasaur", 1, NULL);
 #INSERT INTO Pokemon(dexno, name, type1, type2) VALUES (2, "Ivysaur", 1, NULL);
