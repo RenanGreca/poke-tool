@@ -23,12 +23,16 @@ $link = mysqli_connect("localhost", "test", "test", "poketool");
 ?> <table> <tr> <th>#</th> <th>Pokemon</th> <th> Area </th> <th> Method </th> <th> Time of Day </th> </tr> <?
     foreach ($_POST as $var=>$key) {
         if (!(($var == "user") OR ($var == "game"))){
-        $query = "SELECT * FROM Pokemon JOIN Capture ON Pokemon.dexno = Capture.pid WHERE Pokemon.dexno = '$key'";    
+        $query = "SELECT p.dexno, p.name, c.mid, c.tid, a.name as areaname
+                  FROM Pokemon p
+                  JOIN Capture c ON p.dexno = c.pid
+                  JOIN Area a ON a.aid = c.aid
+                  WHERE p.dexno = '$key'";    
         $result = mysqli_query($link, $query);
         while ($pokemon = mysqli_fetch_array($result)) { 
         ?> <tr><td><? echo $pokemon['dexno'] ?></td>
              <td><? echo $pokemon['name'] ?></td>
-             <td><? echo $pokemon['aid'] ?></td>
+             <td><? echo $pokemon['areaname'] ?></td>
              <td><? switch ($pokemon['mid']) {
                     case 1:
                         echo "Walk";
