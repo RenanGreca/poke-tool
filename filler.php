@@ -144,7 +144,6 @@ if(isset($_POST['func'])){
                     mysqli_query($link, $query);
                 }
                 break;
-            default:
             }
         }
         
@@ -172,10 +171,11 @@ if(isset($_POST['func'])){
 if(!isset($_POST['func'])){
 ?>
 <form action="#" method="POST">
-<input type="checkbox" name="func" value="pokemon" />Add Pokemon Data</br>
-<input type="checkbox" name="func" value="games" />Add Games</br>
-<input type="checkbox" name="func" value="regions" />Add Map Data</br>
-<input type="checkbox" name="func" value="encounters" />Add Encounter Data</br>
+<input type="hidden" name="func" value=1/>
+<input type="checkbox" name="func1" value="pokemon" />Add Pokemon Data</br>
+<input type="checkbox" name="func2" value="games" />Add Games</br>
+<input type="checkbox" name="func3" value="regions" />Add Map Data</br>
+<input type="checkbox" name="func4" value="encounters" />Add Encounter Data</br>
 <input type="submit">
 </form>
 <? } ?>

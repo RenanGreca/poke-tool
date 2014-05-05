@@ -64,15 +64,15 @@ foreach ($pokemon_types_csv as $pokemon_types) {
 
 foreach ($versions_csv as $version) {
     $gen = 0;
-    if ($version[1] <= 2) {
+    if ($version[0] <= 2) {
         $gen = 1;
-    } else if ($version[1] <= 6) {
+    } else if ($version[0] <= 6) {
         $gen = 2;
-    } else if ($version[1] <= 11) {
+    } else if ($version[0] <= 11) {
         $gen = 3;
-    } else if ($version[1] <= 16) {
+    } else if ($version[0] <= 16) {
         $gen = 4;
-    } else if ($version[1] <= 22) {
+    } else if ($version[0] <= 22) {
         $gen = 5;
     } else {
         $gen = 6;
