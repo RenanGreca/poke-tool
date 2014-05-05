@@ -16,9 +16,6 @@ if (isset($_POST)){
     <script type="text/javascript" src="script.js" ></script>
 </head>
 <body>
-<center>
-    <h1>Welcome, <? $_SESSION['name']?>!</h1>
-</center>
 <!-- currently this connection is to localhost for testing purposes with dummy user.-->
 <?  $link = mysqli_connect("localhost", "test", "test", "poketool"); 
 if(!$selected_game){ ?>
@@ -46,9 +43,9 @@ if(!$selected_game){ ?>
 $query = "select * from Pokemon JOIN Pokedex ON Pokemon.dexno = Pokedex.dexno WHERE Pokedex.game='$selected_game'";
 $result = mysqli_query($link, $query);
 ?>
-<div>
+<div style="max-height: 500px; overflow: scroll;">
 <h3> Your Pokedex Currently Looks Like This: </h3>
-<table> <tr> <th>#</th> <th>Pokemon</th> <th> P.Type </th> <th> S.Type </th> </tr> <?  
+<table> <tr> <th>#</th> <th>Pokémon</th> <th> P.Type </th> <th> S.Type </th> </tr> <?  
     while ($pokemon = mysqli_fetch_array($result)) { 
     ?> <tr><td><? echo $pokemon['dexno'] ?></td>
             <td><? echo $pokemon['name'] ?></td>
@@ -97,9 +94,9 @@ $result = mysqli_query($link, $query);
     }  ?></table>
 </div>
   <? } elseif($task == "find") { ?>
-<div>
-<h3> Select Which Pokemon You'd like Help Finding!</h3>
+<h3> Select Which Pokémon You'd like Help Finding!</h3>
 <form action="find.php" method="post">
+<div style="max-height: 500px; overflow: scroll;">
 <input type="hidden" name="user" value=<? echo $_SESSION['logged_user'] ?> />
 <input type="hidden" name="game" value=<? echo $selected_game ?> />
 <?
@@ -110,7 +107,7 @@ $result = mysqli_query($link, $query);
         <input type="checkbox" name="<? echo $pokemon['dexno'] ?>" value=<? echo $pokemon['dexno'] ?> />
         <? echo $pokemon['dexno'] ?> - <? echo $pokemon['name'] ?><br>
         <?
-    } ?><input type="submit" value="Find them all!"/></form></div><?
+    } ?></div><input type="submit" value="Find them all!"/></form><?
 } 
 else { Echo "Something is wrong. You should not see this."; }
 ?>

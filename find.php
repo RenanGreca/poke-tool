@@ -16,8 +16,8 @@ if (!isset($_POST)){
 </head>
 <body>
 <center>
-    <h1>Welcome, <? $_SESSION['name']?>!</h1>
-<h3>Below are a few reasonable places to look for pokemon. Happy Hunting!</h3>
+<h3>Below are a few reasonable places to look for Pokémon. Happy Hunting!</h3>
+<div style="max-height: 550px; overflow: scroll;">
 <?
 $link = mysqli_connect("localhost", "test", "test", "poketool");
 ?> <table> <tr> <th>#</th> <th>Pokemon</th> <th> Area </th> <th> Method </th> <th> Time of Day </th> </tr> <?
@@ -57,6 +57,7 @@ $link = mysqli_connect("localhost", "test", "test", "poketool");
     }  ?></table> <?
 mysqli_close($link);
 ?>
+</div>
 <div class="footer">
     <a href="https://github.com/RenanGreca/poke-tool">Created by Renan Greca and Mari Bennett in 2014</a><br />
     Pokémon and all related content is owned by The Pokémon Company, Nintendo and GameFreak<br />
