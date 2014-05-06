@@ -10,13 +10,13 @@ if (isset($_POST['game'])){
 
 $link = mysqli_connect("localhost", "test", "test", "poketool");
 
-echo $user;
-echo $game;
+//echo $user;
+//echo $game;
     foreach ($_POST as $pokemon=>$pid) {
         if (!( ($pokemon == "user") OR ($pokemon == "game"))) {
             $query = "INSERT INTO Pokedex ( dexno, game, uid ) VALUES ('$pid','$game','$user')";    
             if (!mysqli_query($link,$query)) {
-                Echo "Query errored or already exists."; 
+                //Echo "Query errored or already exists."; 
             }
         }
     }

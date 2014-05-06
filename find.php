@@ -39,6 +39,7 @@ $gen = $gen['gen'];
                   WHERE p.dexno = '$key' AND c.gid IN (SELECT g2.gid From Game g2 WHERE g2.gen = $gen)";
         //echo $query;
         $result = mysqli_query($link, $query);
+        //echo $result;
         while ($pokemon = mysqli_fetch_array($result)) { 
         ?> <tr><td><? echo $pokemon['dexno'] ?></td>
              <td><? echo $pokemon['name'] ?></td>
