@@ -102,7 +102,7 @@ foreach ($regions_csv as $region) {
                 name
               ) VALUES (
                 $region[0],
-                '".ucwords(str_replace("-", " ", ($region[1])))."'
+                '".ucfirst($region[1])."'
               );";
 
     mysqli_query($link, $query);
@@ -118,7 +118,7 @@ foreach ($locations_csv as $location) {
               ) VALUES (
                 $location[0],
                 $location[1],
-                '$location[2]'
+                '".ucwords(str_replace("-", " ", ($location[2])))."'
               );";
 
     mysqli_query($link, $query);
@@ -133,7 +133,7 @@ foreach ($areas_csv as $area) {
               ) VALUES (
                 $area[0],
                 $area[1],
-                '$area[3]'
+                '".ucwords(str_replace("-", " ", ($area[3])))."'
               );";
     //echo $query.'<br>';
 
