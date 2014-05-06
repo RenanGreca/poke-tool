@@ -53,9 +53,9 @@ if(!$selected_game){ ?>
     <input type="submit">
     </form>
 <? } else { ?>
-<div>
 <h3>Which Pokémon have you caught already?</h3>
 <form action="add.php" method="post">
+<div style="max-height: 450px; overflow: scroll;">
 <input type="hidden" name="user" value=<? echo $_SESSION['logged_user'] ?> />
 <input type="hidden" name="game" value=<? echo $selected_game ?> />
 <?
@@ -68,9 +68,10 @@ if(!$selected_game){ ?>
         <?
     }
 ?>
+</div> 
 <input type="submit">
 </form>
-</div> <?
+<?
 } ?>
 <div class="footer">
     <a href="https://github.com/RenanGreca/poke-tool">Created by Renan Greca and Mari Bennett in 2014</a><br />
