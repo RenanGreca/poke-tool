@@ -17,7 +17,8 @@ $regions_csv       = array_map('str_getcsv', file(dirname(__FILE__).'/csv/region
 $locations_csv     = array_map('str_getcsv', file(dirname(__FILE__).'/csv/locations.csv'));
 $encounters_csv    = array_map('str_getcsv', file(dirname(__FILE__).'/csv/encounters.csv'));
 $areas_csv         = array_map('str_getcsv', file(dirname(__FILE__).'/csv/location_areas.csv'));
-
+$methods_csv       = array_map('str_getcsv', file(dirname(__FILE__).'/csv/encounter_methods.csv'));
+$rarity_csv        = array_map('str_getcsv', file(dirname(__FILE__).'/csv/encounter_slots.csv'));
 
 // echo $pokemon_csv[1][1];
 // id    identifier  species_id  height  weight  base_experience order   is_default
@@ -37,15 +38,17 @@ foreach ($pokemon_csv as $pokemon) {
 }
 
 foreach ($types_csv as $type) {
-    $query = "INSERT INTO Types (
+    if ($type[1]==9) { #magic number grabs English name
+    $query = "INSERT INTO Type (
                 tid,
                 name
-              ) VALUES (
+            ) VALUES (
                 $type[0],
-                'ucfirst($type[1])'
-              );";
+                '".ucfirst($type[2])."'
+            );";
     
     mysqli_query($link, $query);
+    }
 }
 
 foreach ($pokemon_types_csv as $pokemon_types) {
@@ -99,7 +102,7 @@ foreach ($regions_csv as $region) {
                 name
               ) VALUES (
                 $region[0],
-                '".ucfirst($region[1])."'
+                '".ucwords(str_replace("-", " ", ($region[1])))."'
               );";
 
     mysqli_query($link, $query);
@@ -137,19 +140,34 @@ foreach ($areas_csv as $area) {
     mysqli_query($link, $query);
 }
 
+foreach ($methods_csv as $method) {
+    $query = "INSERT INTO CatchMethod (
+              mid,
+              description
+              ) VALUES (
+                $method[0],
+                '".ucwords(str_replace("-", " ", ($method[1])))."'
+              );";
+    mysqli_query($link, $query);
+}
+
 // id,version_id,location_area_id,encounter_slot_id,pokemon_id,min_level,max_level
 foreach ($encounters_csv as $encounter) {
-
+    $encounter_slot = $rarity_csv[$encounter[3]];
     $query = "INSERT INTO Capture (
                 pid,
                 aid,
+                mid,
                 gid,
+                fid,
                 min_level,
                 max_level
               ) VALUES (
                 $encounter[4],
                 $encounter[2],
+                $encounter_slot[2],
                 $encounter[1],
+                $encounter_slot[4],
                 $encounter[5],
                 $encounter[6]
               );";

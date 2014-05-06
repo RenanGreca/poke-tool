@@ -88,7 +88,7 @@ CREATE TABLE Capture (
     aid INTEGER NOT NULL, #area
     mid INTEGER NULL, #method
     gid INTEGER NOT NULL, #game
-    tid INTEGER NULL, #time
+    fid INTEGER NULL, #frequency
     min_level INTEGER NULL,
     max_level INTEGER NULL,
     PRIMARY KEY (pid, aid, gid),
