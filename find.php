@@ -20,7 +20,7 @@ else {
 <body>
 <center>
 <h3>Below are a few reasonable places to look for Pokémon. Happy Hunting!</h3>
-<div style="max-height: 550px; overflow: scroll;">
+<div style="max-height: 500px; overflow: scroll;">
 <?
 $link = mysqli_connect("localhost", "test", "test", "poketool");
 $query = "SELECT g.gen FROM Game g WHERE g.gid = '$game'";
@@ -28,7 +28,7 @@ $gen = mysqli_fetch_array(mysqli_query($link, $query));
 $gen = $gen['gen'];
 ?> <table> <tr> <th>#</th> <th>Pokemon</th> <th> Location </th> <th> Area </th> <th> Method </th> <th> Enc. Rate </th> <th> Game </th> </tr> <?
     foreach ($_POST as $var=>$key) {
-        if (!(($var == "user") OR ($var == "game"))){
+      if (!(($var == "user") OR ($var == "game"))){
         $query = "SELECT p.dexno, p.name, m.description as method, c.fid, a.name as areaname, g.name as gamename, l.name as locationname
                   FROM Pokemon p
                   JOIN Capture c ON p.dexno = c.pid
@@ -36,7 +36,7 @@ $gen = $gen['gen'];
                   JOIN Location l ON l.lid = a.lid
                   JOIN CatchMethod m on m.mid = c.mid
                   JOIN Game g ON c.gid = g.gid
-                  WHERE p.dexno = '$key' AND c.gid IN (SELECT g2.gid From Game g2 WHERE g2.gen = $gen)";
+                  WHERE p.dexno = '$key' AND c.gid = $game"; //AND c.gid IN (SELECT g2.gid From Game g2 WHERE g2.gen = $gen)";
         //echo $query;
         $result = mysqli_query($link, $query);
         //echo $result;
@@ -48,9 +48,33 @@ $gen = $gen['gen'];
              <td><? echo ($pokemon['method']) ?></td>
              <td><? echo ($pokemon['fid']); echo "%"; ?></td> 
               <td><? echo $pokemon['gamename'] ?></td></tr> <?
-        }}
-    }  ?></table> <?
+        }
+      }
+    }  
+
+?></table> <?
+foreach ($_POST as $var=>$key) {
+  if (!(($var == "user") OR ($var == "game"))){
+    $query = "SELECT DISTINCT g.name, p.name as pokemon
+              FROM Capture c
+              JOIN Game g ON g.gid = c.gid
+              JOIN Pokemon p ON p.dexno = c.pid
+              WHERE c.pid = '$key' AND g.gid <> $game AND c.gid IN (SELECT g2.gid From Game g2 WHERE g2.gen = $gen)";
+    //echo $query;
+    $result = mysqli_query($link, $query);
+    $othergame = mysqli_fetch_array($result);
+    //echo $result;
+    if ($result) {
+      ?> <b> <? echo $othergame['pokemon']; ?> is also found in other game(s) of generation <? echo $gen; ?>:</b><br> <?
+      echo $othergame['name'].'<br> ';
+    }
+    while ($othergame = mysqli_fetch_array($result)) {
+      echo $othergame['name'].'<br> ';
+    }
+  }
+}
 mysqli_close($link);
+
 ?>
 </div>
 <div class="footer">
