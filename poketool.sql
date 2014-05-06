@@ -34,18 +34,26 @@ CREATE TABLE Region (
     PRIMARY KEY (rid)
 );
 
-CREATE TABLE Area (
-    aid INTEGER NOT NULL,
+CREATE TABLE Location (
+    lid INTEGER NOT NULL,
     rid INTEGER NOT NULL,
     name CHAR(30) NOT NULL,
-    PRIMARY KEY (aid),
+    PRIMARY KEY (lid),
     CONSTRAINT FOREIGN KEY (rid) REFERENCES Region(rid) ON DELETE CASCADE
+);
+
+CREATE TABLE Area (
+    aid INTEGER NOT NULL,
+    lid INTEGER NOT NULL,
+    name CHAR(30) NULL,
+    PRIMARY KEY (aid),
+    CONSTRAINT FOREIGN KEY (lid) REFERENCES Location(lid) ON DELETE CASCADE
 );
 
 CREATE TABLE Game (
     gid INTEGER NOT NULL,
     gen INTEGER NOT NULL,
-    name CHAR(15) NOT NULL,
+    name CHAR(20) NOT NULL,
     plat CHAR(15) NULL,
     PRIMARY KEY (gid)
 );
@@ -75,7 +83,7 @@ CREATE TABLE CatchMethod (
 );
 
 CREATE TABLE Capture (
-    cid INTEGER NOT NULL, #id
+    #cid INTEGER NOT NULL, #id
     pid INTEGER NOT NULL, #pokemon
     aid INTEGER NOT NULL, #area
     mid INTEGER NULL, #method
@@ -83,7 +91,7 @@ CREATE TABLE Capture (
     tid INTEGER NULL, #time
     min_level INTEGER NULL,
     max_level INTEGER NULL,
-    PRIMARY KEY (cid),
+    PRIMARY KEY (pid, aid, gid),
     CONSTRAINT FOREIGN KEY (pid) REFERENCES Pokemon(dexno) ON DELETE CASCADE,
     CONSTRAINT FOREIGN KEY (aid) REFERENCES Area(aid) ON DELETE CASCADE,
     CONSTRAINT FOREIGN KEY (gid) REFERENCES Game(gid) ON DELETE CASCADE

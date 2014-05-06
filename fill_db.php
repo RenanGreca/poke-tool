@@ -16,6 +16,7 @@ $versions_csv      = array_map('str_getcsv', file(dirname(__FILE__).'/csv/versio
 $regions_csv       = array_map('str_getcsv', file(dirname(__FILE__).'/csv/regions.csv'));
 $locations_csv     = array_map('str_getcsv', file(dirname(__FILE__).'/csv/locations.csv'));
 $encounters_csv    = array_map('str_getcsv', file(dirname(__FILE__).'/csv/encounters.csv'));
+$areas_csv         = array_map('str_getcsv', file(dirname(__FILE__).'/csv/location_areas.csv'));
 
 
 // echo $pokemon_csv[1][1];
@@ -64,7 +65,7 @@ foreach ($pokemon_types_csv as $pokemon_types) {
 
 foreach ($versions_csv as $version) {
     $gen = 0;
-    if ($version[0] <= 2) {
+    if ($version[0] <= 3) {
         $gen = 1;
     } else if ($version[0] <= 6) {
         $gen = 2;
@@ -107,8 +108,8 @@ foreach ($regions_csv as $region) {
 
 foreach ($locations_csv as $location) {
 
-    $query = "INSERT INTO Area (
-                aid,
+    $query = "INSERT INTO Location (
+                lid,
                 rid,
                 name
               ) VALUES (
@@ -121,18 +122,31 @@ foreach ($locations_csv as $location) {
 
 }
 
+foreach ($areas_csv as $area) {
+    $query = "INSERT INTO Area (
+                aid,
+                lid,
+                name
+              ) VALUES (
+                $area[0],
+                $area[1],
+                '$area[3]'
+              );";
+    //echo $query.'<br>';
+
+    mysqli_query($link, $query);
+}
+
 // id,version_id,location_area_id,encounter_slot_id,pokemon_id,min_level,max_level
 foreach ($encounters_csv as $encounter) {
 
     $query = "INSERT INTO Capture (
-                cid,
                 pid,
                 aid,
                 gid,
                 min_level,
                 max_level
               ) VALUES (
-                $encounter[0],
                 $encounter[4],
                 $encounter[2],
                 $encounter[1],

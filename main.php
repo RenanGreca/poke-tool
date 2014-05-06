@@ -100,7 +100,10 @@ $result = mysqli_query($link, $query);
 <input type="hidden" name="user" value=<? echo $_SESSION['logged_user'] ?> />
 <input type="hidden" name="game" value=<? echo $selected_game ?> />
 <?
-    $query = "select DISTINCT Pokemon.dexno, Pokemon.name from Pokemon JOIN Capture ON Pokemon.dexno = Capture.pid WHERE Capture.gid = '$selected_game' AND Capture.pid NOT IN (SELECT dexno FROM Pokedex WHERE uid=1)";
+    $query = "SELECT DISTINCT Pokemon.dexno, Pokemon.name 
+              FROM Pokemon 
+              JOIN Capture ON Pokemon.dexno = Capture.pid 
+              WHERE Capture.gid = '$selected_game' AND Capture.pid NOT IN (SELECT dexno FROM Pokedex WHERE uid=1)";
     $result = mysqli_query($link, $query); 
     while ($pokemon = mysqli_fetch_array($result)) {
         ?>
