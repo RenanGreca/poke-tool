@@ -32,13 +32,13 @@ if (isset($_POST)){
     <script type="text/javascript" src="script.js" ></script>
 </head>
 <body>
-<center>
-    <h1>Welcome, <? $_SESSION['logged_user']?>!</h1>
-</center>
 <!-- currently this connection is to localhost for testing purposes with dummy user.-->
 <?  $link = mysqli_connect("localhost", "test", "test", "poketool"); 
 
 if(!$selected_game){ ?>
+<center>
+    <h1>Welcome, <? echo $_SESSION['logged_user']?>!</h1>
+</center>
 <h3>In what game do you want to fill the Pokédex?</h3>
 <?
     $query = "select * from Game";
